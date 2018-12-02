@@ -33,4 +33,16 @@ router.get('/node-api/v1/book', function(req, res, next) {
   })
 });
 
+router.post('/node-api/v1/book', function (req, res) {
+    let body = req.body;
+    console.log(body);
+    connection.query('INSERT INTO books SET ?', req.body, 
+        function (err, result) {
+            if (err) throw err;
+            res.send('Book added to database with Title: ' + result.Title);
+        }
+    );
+});
+
+
 module.exports = router;
